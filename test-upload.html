@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test Upload</title>
+
+<style>
+.file-upload-wrapper {display: flex;align-items: center,gap: 12px;}
+.file-input-visible {display: none;}
+.file-upload-btn {padding: 12px;border: 2px dashed #ccc;border-radius: 8px;cursor: pointer;}
+.file-name {color: #666;}
+.preview-img {max-height:200px;max-width:300px;border-radius:8px;margin-top:10px;display:none;border:1px solid #ccc;}
+</style>
+
+<script>
+function setupFilePreview(id) {
+  const input = document.getElementById(id);
+  const fileName = document.querySelector('#' + id + ' ~ .file-name');
+  const previewId = id + 'Preview';
+  let preview = document.getElementById(previewId);
+  if (!preview) {
+    preview = document.createElement('img');
+    preview.id = previewId;
+    preview.className = 'preview-img';
+    input.parentNode.appendChild(preview);
+  }
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      fileName.textContent = file.name;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        preview.src = ev.target.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      fileName.textContent = 'No file chosen';
+      preview.style.display = 'none';
+    }
+  };
+}
+</script>
+</head>
+<body>
+<h1>Test File Upload</h1>
+<div class="file-upload-wrapper">
+  <input type="file" id="testFile" class="file-input-visible" accept="image/*">
+  <label for="testFile" class="file-upload-btn">Choose Image</label>
+  </div>
+<button onclick="console.log('Button works')">Test Button</button>
+
+</body>
+</html>

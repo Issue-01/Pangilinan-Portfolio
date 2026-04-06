@@ -1,0 +1,1108 @@
+/* Tech/Corporate Student Portfolio Styles - Complete commented stylesheet */
+
+/* Import Google Fonts for Inter font family with multiple weights for typography hierarchy */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Universal reset and box-sizing for consistent layout calculations */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS Custom Properties (variables) for consistent theming and easy maintenance */
+:root {
+    --primary-dark: #1e293b;        /* Main dark text and accent color */
+    --nav-height: 60px;             /* Fixed height for navigation bar */
+    --nav-bg: #ffffff;              /* Navigation background */
+    --nav-border: #e5e5e5;          /* Navigation bottom border */
+
+--primary-blue: #000000;        /* Primary accent color (used for borders, underlines) - black for B&W */
+    --accent-cyan: #333333;         /* Secondary hover accent - dark gray */
+    --accent-purple: #666666;       /* Purple accent for specific sections - gray */
+--success: #000000;             /* Success state color - black */
+    --warning: #333333;             /* Warning state color - dark gray */
+    --danger: #666666;              /* Danger/error color - gray */
+    --bg-light: #f5f5f5;            /* Light background color for cards */
+    --bg-dark: #1e293b;             /* Dark background */
+    --text-dark: #1e293b;           /* Primary text color */
+    --text-muted: #64748b;          /* Secondary/muted text */
+    --border-color: #e2e8f0;        /* General borders */
+    --card-bg: #ffffff;             /* Card backgrounds */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);     /* Small shadow for subtle elevation */
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);   /* Medium shadow */
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);   /* Large shadow for prominent cards */
+}
+
+.profile-fallback {
+    font-size: 3.5rem;
+    color: var(--text-muted);
+    font-weight: 200;
+    z-index: 1;
+}
+
+/* Base body styling with font family fallback chain and light background */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f5f5;
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Main content container - centers content with max-width constraint */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Header styling - centered with bottom accent underline */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+header h1 {
+    color: var(--primary-dark);
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 12px;
+}
+
+/* Decorative underline accent below header using ::after pseudo-element */
+header h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 80px;
+    height: 4px;
+    background: var(--primary-blue);
+    border-radius: 2px;
+}
+
+/* Container for back button - left-aligned with margin */
+.back-button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+}
+
+/* Back button styling with icon, border, and hover effects */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    color: var(--primary-dark);
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid var(--border-color);
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+    box-shadow: var(--shadow-sm);
+}
+
+.back-btn:hover {
+    background: var(--primary-dark);
+    color: white;
+    border-color: var(--primary-dark);
+}
+
+/* Fixed top navigation bar styling */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--nav-border);
+    box-shadow: var(--shadow-sm);
+    z-index: 1000;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+/* Navigation container - centers content and handles layout */
+.nav-container {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo link styling */
+.nav-logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+/* Main navigation menu - flex list with gaps */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+}
+
+/* Individual nav links with underline animation on hover */
+.nav-link {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-blue);
+}
+
+/* Animated underline effect using ::after pseudo-element */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-blue);
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Dropdown container positioning */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+/* Dropdown menu - positioned absolutely, hidden by default with transition */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    min-width: 180px;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+    list-style: none;
+    padding: 8px 0;
+}
+
+/* Show dropdown on parent hover with smooth transition */
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Individual dropdown items */
+.dropdown-item {
+    padding: 12px 20px;
+    color: var(--text-dark);
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+}
+
+.dropdown-item:hover {
+    background: var(--bg-light);
+    color: var(--primary-blue);
+}
+
+/* Mobile hamburger menu - hidden on desktop */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+}
+
+/* Individual hamburger lines with transition for animation */
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-dark);
+    transition: 0.3s;
+}
+
+/* Profile main section layout */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Main profile card container */
+.profile-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Top accent bar using ::before pseudo-element */
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--primary-blue);
+}
+
+/* Two-column profile layout (photo left, info right) */
+.profile-layout {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+/* Left photo section container */
+.profile-photo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+}
+
+/* Skills tags container under photo - flex wrap for responsive layout */
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    max-width: 280px;
+    padding: 12px 0;
+}
+
+/* Profile picture styling with hover effects and fallback support */
+.profile-picture {
+    width: 220px;
+    height: 220px;
+    border-radius: 12px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 4px solid var(--primary-blue);
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+/* Hover effect for profile picture */
+.profile-picture:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Fallback text styling inside profile picture */
+.profile-picture span {
+    font-size: 4rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    position: absolute;
+}
+
+/* Profile image positioning inside picture container */
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+}
+
+/* Right info section - flexible width */
+.profile-info-section {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Info section header with accent underline */
+.profile-info-section h2 {
+    color: var(--primary-dark);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    letter-spacing: -0.3px;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+/* Gradient underline for info header */
+.profile-info-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan));
+    border-radius: 2px;
+}
+
+/* Container for display info cards */
+.display-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Individual info card styling */
+.display-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 24px;
+    background: var(--bg-light);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-blue);
+}
+
+/* Hover effect for info cards */
+.display-item:hover {
+    background: var(--bg-light);
+    border-left-color: var(--accent-cyan);
+}
+
+/* Info labels styling */
+.display-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Info values styling */
+.display-value {
+    color: var(--primary-dark);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* Large prominent values */
+.display-value.large-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+/* Icon button styling */
+.btn-icon {
+    font-size: 1.1rem;
+    display: inline-block;
+}
+
+/* Form section icons */
+.form-icon {
+    font-size: 1.3rem;
+    margin-right: 8px;
+}
+
+/* Label accent dots */
+.label-dot {
+    color: var(--primary-blue);
+    font-size: 0.5rem;
+    margin-right: 6px;
+}
+
+/* Action buttons container */
+.action-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Navigation/action buttons */
+.nav-btn {
+    padding: 16px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.3px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Grades button specific styling */
+
+/* No .grades-btn - unified with .add-btn/nav-btn/back-btn B&W */
+
+
+.grades-btn:hover {
+    background: var(--primary-blue);
+}
+
+/* Grades/dashboard section layout */
+.grades-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Add task/upload form styling */
+.add-task-form {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 36px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Top accent bar for forms */
+.add-task-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--accent-purple);
+}
+
+/* Form hover effect (empty for now) */
+.add-task-form:hover {
+}
+
+/* Form headers with accent underline */
+.add-task-form h3 {
+    color: var(--primary-dark);
+    margin-bottom: 28px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    letter-spacing: -0.3px;
+}
+
+/* Underline accent for form headers */
+.add-task-form h3::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: var(--accent-purple);
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+/* Two-column form layout */
+.form-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Individual form input groups */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Full-width input groups */
+.input-group.full-width {
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* Form labels with accent dots */
+.input-group label {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+/* Form input fields styling */
+.input-group input[type="text"],
+.input-group input[type="number"] {
+    padding: 14px 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #f8fafc;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+}
+
+/* Input focus states */
+.input-group input[type="text"]:focus,
+.input-group input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    background: white;
+}
+
+/* Placeholder text styling */
+.input-group input::placeholder {
+    color: var(--text-muted);
+}
+
+/* File upload wrapper */
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* File inputs - VISIBLE for testing */
+.file-input-visible {
+    display: block !important;
+    position: static !important;
+    opacity: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    margin-right: 10px;
+}
+.file-upload-btn {
+    cursor: pointer;
+}
+
+
+/* Styled file upload button with dashed border */
+.file-upload-btn {
+    background: var(--bg-light);
+    color: var(--text-dark);
+    padding: 12px 24px;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* File upload button hover */
+.file-upload-btn:hover {
+    border-color: var(--primary-blue);
+    background: var(--bg-light);
+    border-style: solid;
+}
+
+/* Upload icon sizing */
+.upload-icon {
+    font-size: 1.2rem;
+}
+
+/* File name display text */
+.file-name {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Primary action buttons (Add/Submit) */
+
+.add-btn, .nav-btn, .back-btn {
+    background: #000;
+    color: #fff;
+    border: 2px solid #000;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    font-family: 'Inter', sans-serif;
+    margin-top: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    text-decoration: none;
+    box-shadow: none;
+}
+.add-btn:hover, .nav-btn:hover, .back-btn:hover {
+    background: #fff;
+    color: #000;
+}
+
+
+/* Add button hover state */
+.add-btn:hover {
+    background: var(--accent-cyan);
+}
+
+/* Section containers (about, skills, projects, grades) */
+.about-section,
+.skills-section,
+.projects-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 40px;
+    margin: 30px 0;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+/* Section title styling with centered underline */
+.section-title {
+    color: var(--primary-dark);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+/* Section title underline accent */
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--primary-blue);
+    border-radius: 2px;
+}
+
+/* Skills grid layout (now also used for tags) */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+/* Projects responsive grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+/* Skill badge styling - fitted text borders with hover fill effect */
+.skill-item {
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px solid var(--primary-blue);
+    flex: 0 0 auto;
+    transition: all 0.3s;
+    background: transparent;
+    white-space: nowrap;
+}
+
+/* Skill badge hover - fills background and changes text color */
+.skill-item:hover {
+    background: var(--primary-blue);
+    color: white;
+}
+
+/* Project card styling */
+.project-card {
+    background: var(--bg-light);
+    padding: 24px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-blue);
+    text-align: center;
+    transition: all 0.3s;
+}
+
+/* Hover effects for cards and badges */
+.skill-item:hover,
+.project-card:hover {
+    box-shadow: var(--shadow-md);
+    border-left-color: var(--accent-cyan);
+}
+
+/* Additional skill hover (conflicting, but preserved for compatibility) */
+.skill-item:hover {
+    background: var(--bg-light);
+}
+
+/* Skill/project name typography */
+.skill-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--primary-dark);
+}
+
+/* Project links styling */
+.project-link {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 12px;
+    display: inline-block;
+}
+
+/* Project link hover underline */
+.project-link:hover {
+    text-decoration: underline;
+}
+
+/* Grades grid responsive layout */
+.grades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+/* Task/grade card styling */
+.task-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+/* Left accent bar for task cards */
+.task-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--primary-blue);
+}
+
+/* Task card hover elevation */
+.task-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-blue);
+}
+
+/* Task image container */
+.task-image {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+}
+
+/* Task title styling */
+.task-name {
+    color: var(--primary-dark);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: -0.3px;
+}
+
+/* Score bar container */
+.task-score {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+/* Progress bar background */
+.score-bar {
+    flex: 1;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Score bar empty state */
+.score-bar::before {
+    content: '';
+}
+
+/* Score fill bar */
+.score-fill {
+    height: 100%;
+    border-radius: 5px;
+}
+
+/* Score fill gradient for excellent grades */
+.score-fill.excellent {
+    background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+/* Score fill gradient for good grades */
+.score-fill.good {
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+/* Score fill gradient for average grades */
+.score-fill.average {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+/* Score fill gradient for low grades */
+.score-fill.low {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+/* Score text display */
+.score-text {
+    font-weight: 700;
+    min-width: 65px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Delete button styling with danger theme */
+.delete-btn {
+    background: white;
+    color: var(--danger);
+    border: 2px solid var(--danger);
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 100%;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Delete button - X close */
+.delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ef4444;
+    background: white;
+    border-radius: 50%;
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+.delete-btn:hover {
+    background: #ef4444;
+    color: white;
+}
+
+/* Upload success styling */
+.file-upload-wrapper.success {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+.add-btn:disabled {
+  background: #10b981 !important;
+  border-color: #10b981 !important;
+}
+
+/* Tablet responsive adjustments */
+@media (max-width: 768px) {
+    /* Stack profile columns vertically on tablet */
+    .profile-layout {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    
+    /* Center info section content on tablet */
+    .profile-info-section {
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Center info header underline on tablet */
+    .profile-info-section h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Left-align display items on tablet */
+    .display-item {
+        text-align: left;
+    }
+    
+    /* Smaller header on tablet */
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    /* Stack form rows vertically */
+    .form-row {
+        flex-direction: column;
+    }
+    
+    /* Single column grades grid on tablet */
+    .grades-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile navigation adjustments */
+@media (max-width: 768px) {
+    /* Reduce nav padding on mobile */
+    .top-nav {
+        padding: 0 16px;
+    }
+
+    /* Hide desktop menu on mobile, show when mobile-open */
+    .nav-menu {
+        display: none;
+    }
+    .nav-menu.mobile-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        border-top: 1px solid var(--nav-border);
+        padding: 20px 0;
+        box-shadow: var(--shadow-md);
+    }
+    .nav-menu.mobile-open .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+    .nav-menu.mobile-open .nav-link {
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--bg-light);
+    }
+
+    /* Hamburger active state */
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Show hamburger on mobile */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Add top padding to content for fixed nav */
+    .container {
+        padding-top: var(--nav-height);
+    }
+
+    /* Account for nav height in sections */
+    .profile-section,
+    .grades-section {
+        padding-top: var(--nav-height);
+    }
+}
+
+/* Phone responsive adjustments */
+@media (max-width: 480px) {
+    /* Reduce body padding on phone */
+    body {
+        padding: 20px 16px;
+    }
+    
+    /* Smaller profile picture on phone */
+    .profile-picture {
+        width: 180px;
+        height: 180px;
+    }
+    
+    /* Reduce card padding on phone */
+    .profile-card {
+        padding: 24px;
+    }
+    
+    /* Smaller large values on phone */
+    .display-value.large-text {
+        font-size: 1.4rem;
+    }
+    
+    /* Reduce form padding on phone */
+    .add-task-form {
+        padding: 24px;
+    }
+}
+
+/* Animations section - all entrance animations removed */
+.profile-card,
+.add-task-form,
+.task-card,
+.about-section,
+.skills-section,
+.projects-section {
+}
+
+.top-nav {
+}
+

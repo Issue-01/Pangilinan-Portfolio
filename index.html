@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for character encoding and responsive viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile | Academic Portfolio</title>
+    <!-- Links external stylesheet and Google Fonts for Inter font family -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Preconnect for faster Google Fonts loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <noscript>
+        <div style="position:fixed;top:0;left:0;right:0;background:#ef4444;color:white;padding:1rem;text-align:center;z-index:9999;font-family:sans-serif;">
+            JavaScript required for interactive features. Enable JS or use modern browser.
+        </div>
+    </noscript>
+    <!-- Fixed top navigation bar with logo, menu links, dropdown for uploads, and mobile hamburger menu -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <!-- Site logo linking back to home -->
+            <a href="index.html" class="nav-logo">Portfolio</a>
+            <!-- Main navigation menu -->
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="dropdown">
+                    <!-- Dropdown trigger for upload pages -->
+                    <span class="nav-link dropdown-toggle">Uploads</span>
+                    <!-- Hidden dropdown menu shown on hover -->
+                    <ul class="dropdown-menu">
+                        <li><a href="quiz-upload.html" class="dropdown-item">Quiz Upload</a></li>
+                        <li><a href="lab-upload.html" class="dropdown-item">Lab Work Upload</a></li>
+                        <li><a href="major-exam-upload.html" class="dropdown-item">Major Exam Upload</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Mobile hamburger menu (3 lines, shows on small screens) -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content container with top padding for fixed nav -->
+    <div class="container" style="padding-top: 80px;">
+        <main class="profile-section">
+            <!-- Primary profile card with two-column layout for photo and info -->
+            <div class="profile-card">
+                <div class="profile-layout">
+                    <!-- Left column: Profile photo and skills tags -->
+                    <div class="profile-photo-section">
+                        <!-- Circular profile picture with fallback text "ID" if image fails to load -->
+                        <div class="profile-picture large">
+                            <!-- Profile image with onerror handler to show fallback -->
+                            <img src="profile.JPG" alt="Profile Photo" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'block\';">
+                            <!-- Fallback text shown if image doesn't load -->
+                            <span class="profile-fallback" style="display:none;">ID</span>
+                        </div>
+                        
+                        <!-- Horizontal skill tags displayed as bordered pills below photo -->
+                        <div class="skills-tags">
+                            <div class="skill-item">
+                                <div class="skill-name">HTML/CSS</div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">JavaScript</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <!-- Right column: Personal information display -->
+                    <div class="profile-info-section">
+                        <!-- Section header with underline accent -->
+                        <h2>Personal Information</h2>
+                        
+                        <!-- Three static info cards for name, ID, and course -->
+                        <div class="display-info">
+                            <div class="display-item">
+                                <span class="display-label">Full Name</span>
+                                <span class="display-value large-text">Alver Daniel D. Pangilinan</span>
+                            </div>
+                            <div class="display-item">
+                                <span class="display-label">Student ID</span>
+                                <span class="display-value large-text">251101268</span>
+                            </div>
+                            <div class="display-item">
+                                <span class="display-label">Course and Year</span>
+                                <span class="display-value large-text">BSCS - 1D</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About Me section with centered paragraph -->
+            <div class="about-section">
+                <h2 class="section-title">About Me</h2>
+                <!-- Descriptive bio text centered with custom inline styles for typography -->
+                <p style="text-align: center; font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); max-width: 700px; margin: 0 auto;">
+                    I'm a student who is interested to learn and explore a lot of things related to coding.
+                </p>
+            </div>
+
+            <!-- Featured projects grid -->
+            <div class="projects-section">
+                <h2 class="section-title">Featured Projects</h2>
+                <!-- Responsive grid of 3 project cards linking to other pages -->
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Academic Portfolio</h3>
+                        <p>Responsive portfolio with upload system for quizzes, labs, and exams.</p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Grades Dashboard</h3>
+                        <p>Interactive dashboard for tracking and visualizing academic performance.</p>
+                        <a href="dashboard.html" class="project-link">View Dashboard →</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Quiz Analyzer</h3>
+                        <p>Tool for uploading and analyzing quiz results with performance metrics.</p>
+                        <a href="quiz-upload.html" class="project-link">Try Demo →</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Academic Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<script src="app.js"></script>
+<script>
+window.uploads = JSON.parse(localStorage.getItem('uploads') || '[]');
+function updateAll() {
+  const totalScore = window.uploads.reduce((s, u) => s + u.score, 0);
+  const totalMax = window.uploads.reduce((s, u) => s + u.maxScore, 0);
+  document.querySelector('.total-score').textContent = `${totalScore}/${totalMax}`;
+  document.querySelector('.avg-grade').textContent = totalMax ? ((totalScore / totalMax) * 100).toFixed(1) + '%' : '0%';
+  document.querySelector('.total-uploads').textContent = window.uploads.length;
+  
+  ['quiz', 'lab', 'exam'].forEach(type => {
+    const count = window.uploads.filter(u => u.type === type).length;
+    const span = document.querySelector(`[data-type="${type}"] .count`);
+    if (span) span.textContent = count;
+    const grid = document.querySelector(`[data-type="${type}"] ~ .grades-grid`);
+    if (grid) {
+      const items = window.uploads.filter(u => u.type === type);
+      grid.innerHTML = items.map(u => `
+        <div class="task-card">
+          <img src="${u.imagePreview}" class="task-image">
+          <h4>${u.title}</h4>
+          <div class="task-score">
+            <div class="score-bar"><div class="score-fill" style="width:${u.percentage}"></div></div>
+            <span>${u.score}/${u.maxScore}</span>
+          </div>
+        </div>
+      `).join('') || '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);">No items</div>';
+    }
+  });
+}
+updateAll();
+  window.addEventListener('storageUpdate', updateAll);
+  window.uploads.forEach(u => {
+    if (!u.percentage) {
+      u.percentage = ((u.score / u.maxScore) * 100).toFixed(1) + '%';
+      u.grade = parseFloat(u.percentage) >= 90 ? 'Excellent' : 'Good';
+    }
+  });
+localStorage.setItem('uploads', JSON.stringify(window.uploads));
+</script>
+
+</head>
+    
+<body>
+    <noscript>
+        <div style="position:fixed;top:0;left:0;right:0;background:#ef4444;color:white;padding:1rem;text-align:center;z-index:9999;font-family:sans-serif;">
+            JavaScript required for dashboard and uploads. Enable JS or use modern browser.
+        </div>
+    </noscript>
+    <!-- Fixed top navigation bar - provides consistent navigation across all pages -->
+    <!-- Logo, Home/Dashboard/Uploads links, mobile hamburger menu -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Portfolio</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+                <li class="dropdown">
+                    <span class="nav-link dropdown-toggle">Uploads</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="quiz-upload.html" class="dropdown-item">Quiz Upload</a></li>
+                        <li><a href="lab-upload.html" class="dropdown-item">Lab Work Upload</a></li>
+                        <li><a href="major-exam-upload.html" class="dropdown-item">Major Exam Upload</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 80px;">
+        <main class="grades-section">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h1 style="font-size: 2.5rem; color: var(--primary-dark); margin-bottom: 10px;">Dashboard</h1>
+                <p style="color: var(--text-muted); font-size: 1.1rem;">Overview of your academic uploads and performance</p>
+            </div>
+
+            <!-- Quizzes Section -->
+            <div class="about-section">
+<h2 class="section-title" data-type="quiz">Quizzes (<span class="count">0</span>)</h2>
+                <div class="grades-grid" id="quizzes-grid">
+                </div>
+            </div>
+
+            <!-- Lab Works Section -->
+            <div class="about-section">
+<h2 class="section-title" data-type="lab">Lab Works (<span class="count">0</span>)</h2>
+                <div class="grades-grid">
+                </div>
+            </div>
+
+            <!-- Major Exams Section -->
+            <div class="about-section">
+<h2 class="section-title" data-type="exam">Major Exams (<span class="count">0</span>)</h2>
+                <div class="grades-grid">
+                </div>
+            </div>
+
+            <!-- Quick Stats (Placeholder) -->
+            <div class="about-section">
+                <h2 class="section-title">Quick Stats</h2>
+                <div class="grades-grid">
+                    <div class="task-card">
+                        <h3>Total Score</h3>
+                        <div class="task-score">
+                            <div class="score-bar">
+                                <div class="score-fill excellent" style="width: 0%;"></div>
+                            </div>
+<span class="score-text total-score">0/0</span>
+                        </div>
+                        <p style="margin-top: 10px; color: var(--text-muted);">No assessments yet</p>
+                    </div>
+                    <div class="task-card">
+                        <h3>Average Grade</h3>
+<span class="avg-grade" style="font-size: 3rem; font-weight: 700; color: var(--text-muted);">—</span>
+                        <p style="margin-top: 10px; color: var(--text-muted);">No data</p>
+                    </div>
+                    <div class="task-card">
+                        <h3>Uploads</h3>
+<div class="total-uploads" style="font-size: 3rem; font-weight: 700; color: var(--primary-blue);">0</div>
+                        <p style="margin-top: 10px; color: var(--text-muted);">Total uploads</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+
