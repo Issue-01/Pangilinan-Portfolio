@@ -58,7 +58,7 @@
                         <!-- Circular profile picture with fallback text "ID" if image fails to load -->
                         <div class="profile-picture large">
                             <!-- Profile image with onerror handler to show fallback -->
-                            <img src="profile.JPG" alt="Profile Photo" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'block\';">
+                            <img src="profile.JPG" alt="Profile Photo" onerror="this.parentNode.innerHTML=\'<span class=\\\"profile-fallback\\\">ID</span>\'; this.style.display=\'none\';">
                             <!-- Fallback text shown if image doesn't load -->
                             <span class="profile-fallback" style="display:none;">ID</span>
                         </div>
@@ -132,6 +132,36 @@
             </div>
         </main>
     </div>
+    <script>
+        // Click-based dropdown for Uploads
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.querySelector('.dropdown-toggle');
+            const dropdown = document.querySelector('.dropdown');
+
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.classList.toggle('open');
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', () => {
+                dropdown.classList.remove('open');
+            });
+
+            // Mobile nav
+            const ham = document.querySelector('.hamburger');
+            const nav = document.querySelector('.nav-menu');
+            if (ham && nav) {
+                ham.onclick = () => {
+                    nav.classList.toggle('mobile-open');
+                    ham.classList.toggle('active');
+                };
+            }
+            window.onresize = () => {
+                if (window.innerWidth > 768 && nav) nav.classList.remove('mobile-open');
+            };
+        });
+    </script>
 </body>
 </html>
 
