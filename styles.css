@@ -218,8 +218,8 @@ header h1::after {
     padding: 8px 0;
 }
 
-/* Show dropdown on parent hover with smooth transition */
-.dropdown:hover .dropdown-menu {
+/* Show dropdown on click (class added by JS) */
+.dropdown.open .dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
