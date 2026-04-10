@@ -181,6 +181,8 @@ window.addEventListener('storage', e => {
 
 document.addEventListener('DOMContentLoaded', () => {
   window.updateDashboard();
+  
+  // Mobile hamburger menu
   const ham = document.querySelector('.hamburger');
   const nav = document.querySelector('.nav-menu');
   if (ham && nav) {
@@ -189,6 +191,21 @@ document.addEventListener('DOMContentLoaded', () => {
       ham.classList.toggle('active');
     };
   }
+  
+  // Dropdown toggle functionality for all pages
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const dropdown = document.querySelector('.dropdown');
+  if (dropdownToggle && dropdown) {
+    dropdownToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+      dropdown.classList.remove('open');
+    });
+  }
+  
   window.onresize = () => {
     if (window.innerWidth > 768 && nav) nav.classList.remove('mobile-open');
   };
