@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Upload Test</title>
+</head>
+<body>
+<h1>Upload Test - Works?</h1>
+<form onsubmit="event.preventDefault(); alert('Form captured!'); return false;">
+  <input type="file" id="test" accept="image/*">
+  <label for="test" style="background:lightblue;padding:10px;display:block;">CLICK ME FOR FILE PICKER</label>
+  <span id="filename">No file</span>
+  <img id="preview" style="max-width:300px;display:none;">
+  <button type="submit">Submit Test</button>
+</form>
+
+<script>
+document.getElementById('test').onchange = function(e) {
+  const file = e.target.files[0];
+  document.getElementById('filename').textContent = file ? file.name : 'No file';
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      document.getElementById('preview').src = ev.target.result;
+      document.getElementById('preview').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+};
+console.log('Simple test loaded');
+</script>
+</body>
+</html>
+

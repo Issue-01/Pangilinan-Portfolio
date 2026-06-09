@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Grades | Academic Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<script src="app.js"></script>
+
+
+</head>
+    
+
+<body>
+    <!-- Fixed top navigation bar with consistent site navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Portfolio</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="dropdown">
+                    <span class="nav-link dropdown-toggle">Uploads</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="quiz-upload.html" class="dropdown-item">Quiz Upload</a></li>
+                        <li><a href="lab-upload.html" class="dropdown-item">Lab Work Upload</a></li>
+                        <li><a href="major-exam-upload.html" class="dropdown-item">Major Exam Upload</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 80px;">
+        <div class="back-button-container">
+            <a href="dashboard.html" class="back-btn">
+                <span class="btn-icon">&#x2190;</span> Back to Dashboard
+            </a>
+        </div>
+        
+        <main class="grades-section">
+
+            
+            <!-- Add Assessment Form -->
+            <div class="add-task-form">
+                <h3>
+
+                    Add New Assessment
+                
+                </h3>
+                
+                <form action="#" method="post" enctype="multipart/form-data" data-type="assessment" onsubmit="window.handleFormSubmit(event); return false;">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="taskName">
+                                <span class="label-dot"></span> Assessment Title
+                            </label>
+                            <input type="text" id="taskName" name="taskName" placeholder="e.g., Mathematics Quiz" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="taskScore">
+                                <span class="label-dot"></span> Score Obtained
+                            </label>
+                            <input type="number" id="taskScore" name="taskScore" placeholder="e.g., 85" min="0" max="100" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="taskMax">
+                                <span class="label-dot"></span> Maximum Score
+                            </label>
+                            <input type="number" id="taskMax" name="taskMax" placeholder="e.g., 100" min="1" value="100">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group full-width">
+                        <label for="taskImage">
+                            <span class="label-dot"></span> Upload Evidence (Optional)
+                        </label>
+                        <div class="file-upload-wrapper">
+
+                            <input type="file" id="taskImage" name="taskImage" accept="image/*" class="file-input-visible">
+                        </div>
+                    </div>
+                    
+
+                    
+                    <button type="submit" class="add-btn">
+                        <span class="btn-icon">&#x2713;</span> Add Assessment
+                    </button>
+                </form>
+                
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+
